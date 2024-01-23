@@ -4,16 +4,30 @@ const app = express();
 
 const PORT = 5000;
 
-const tasksRouter = require('./list-view-router.js');
 
-const tasksIdRouter = requiere('./list-edit-router.js');
+const tasks = [
+	{
+            id: 123456,
+            isCompleted: true,
+            description: 'walk the dog',
+        },
+        {
+            id: 354675,
+            isCompleted: false,
+            descripcion: 'Buy a car',
+        },
+        {
+            id: 498765,
+            isCompleted: false,
+            description: 'Read a charper of books',
+        },
+        {
+            id:678954,
+            isCompleted: true,
+            description: 'go to the gym',
+        },
+    ];
 
-app.use('/tasks',tasksRouter);
-
-app.use('/tasksId',tasksIdRouter);
-
-
-
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+    });

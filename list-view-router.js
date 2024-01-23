@@ -1,60 +1,80 @@
-const { Router } = require('express');
-
+const { Router } = require("express");
 const router = Router();
 
 const tasks = [
 	{
-            id: 123456,
-            isCompleted: true,
-            description: 'walk the dog',
-        },
-        {
-            id: 354675,
-            isCompleted: false,
-            descripcion: 'Buy a car',
-        },
-        {
-            id: 498765,
-            isCompleted: false,
-            description: 'Read a charper of books',
-        },
-        {
-            id:678954,
-            isCompleted: true,
-            description: 'go to the gym',
-        },
-    ];
-
+		id: 1, 
+		isCompleted: true, 
+		description: "Ir al gimnacio"
+	},
+	{
+		id: 2, 
+		Completed: true, 
+		description: "Hacer cambio de aceite al carro"
+	},
+	{
+		id: 3, 
+		Completed: false, 
+		description: "Comprar comida al gato"
+	},
+	{
+		id: 4, 
+		Completed: true, 
+		description: "Llevar a Edrick al dentista"
+	},
+	{
+		id: 5, 
+		Completed: false, 
+		description: "Lavar la ropa"
+	}
+	];
 
 router.get('/', (req, res) => {
-	res.status(200).send('Lista de tareas');
+    res.json(tasks)
 });
+
 
 
 router.get('/:taskId', (req, res) => {
-    const taskId = req.params.taskId;
-    
+	const taskId = parseInt(req.params.taskId);
+	const task = tasks.find(t => t.id === taskId);
+  
+	if (task) {
+	  res.json(task);
+	} else {
+	  res.status(404).json({ error: 'Tarea no encontrada' });
+	}
+  });
 
-    if (taskId) {
-    return res.status(201).send('task ${task.id} y description ${descrip}');
-    }
-    return res.status(400).send('Tarea no encontrada')
 
-});
+  router.get('/tasks/completed', (req, res) => {
+	const completedTasks = tasks.filter(task => task.completed);
+	res.json(completedTasks);
+  });
+  
+  // Ruta para obtener tareas incompletas
+  router.get('/tasks/incomplete', (req, res) => {
+	const incompleteTasks = tasks.filter(task => !task.completed);
+	res.json(incompleteTasks);
+  });
 
 
-router.get('/', (req, res) => {
-    const completas = req.query.completas;
 
-    if (completas !== undefined) {
-        const esCompleta = completas.toLowerCase() === 'true';
-        const tareasFiltradas = tasks.filter(tarea => tarea.completa === esCompleta);
-        res.json(tareasFiltradas);
-    } else {
-        // Si no se proporciona el parámetro completas, devolver todas las tareas
-        res.json(tasks);
-    }
-});
+
+//   router.get('/tasks/filter', (req, res) => {
+// 	const filtered = req.query.Completed
+
+// 	if (filtered) {
+// 		const completedTasks = tasks.filter((item) => item.isCompleted === true);
+// 		res.json(completedTasks);
+// 	} else {
+// 		const completedTasks = tasks.filter((item) => item.isCompleted === false);
+// 		res.json(completedTasks);
+// 	}
+// });
+
+
+
 
 
 	
