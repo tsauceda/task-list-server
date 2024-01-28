@@ -1,0 +1,28 @@
+#SHOPTECH APP#
+
+#SHOPTECH es una tienda de venta de tecnologia en la cual podras encontrar
+todo tipo de productos tecnologicos.
+como ser: 
+1. laptop
+2. celulares
+3. tablets
+4. disco duros
+5.consolas
+6. play stations
+7. etc.
+
+#en nuestra aplicacion puedes tener la opcion de registrar tus productos de deseo
+y eliminarlos de manera intuitiva. podras organizarlos por prioridad, compras y estado de la compra hasta su entregra.
+en nuestra app utilizamos JWT para la autenticacion de  usuarios, asefurando la integridad de autenticidad de la informacion. Garantiza un acceso
+seguro a las funcionalidades de SHOPTECH.
+#el registro de usuarios, facilita la creacion de cuentas de usuario con informacion  minima y segura. Garantiza un proceso de registro rapido y facil.
+#ofrece tambien opciones avanzadas de filtrado y busqueda para encontrar rapidamente productos especificos. Ahorra tiempo y mejora la eficiencia en la gestion de tus compras.
+
+#Utilizamos tecnologias clave que incluyen:
+1. Express.js
+2. JSON Web Token (JWT)
+3. Middleware de Validacion
+
+en resumen SHOPTECH ofrece una solucion completa para la compra de productos tecnologicos, combinando la eficiencia de Express.js con 
+la seguridad de JWT. Su capacidad de integracion y funciones avanzadas lo convierten en una herramienta esencial para aquellos que buscan
+una gestion de compras efectivas y segura en entorno web.
