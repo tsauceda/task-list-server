@@ -59,24 +59,98 @@ router.get('/:taskId', (req, res) => {
   });
 
 
+// Crear una nueva tarea
+app.post('/tasks', (req, res) => {
+    const { description, isCompleted } = req.body;
+    if (!description) {
+        return res.status(400).json({ error: 'Description is required' });
+    }
+    const newTask = {
+        id: tasks.length + 1,
+        isCompleted: !!isCompleted, // Convertir a booleano
+        description
+    };
+    tasks.push(newTask);
+    res.status(201).json(newTask);
+});
+
+// Actualizar una tarea
+app.put('/tasks/:taskId', (req, res) => {
+    const taskId = parseInt(req.params.taskId);
+    const task = tasks.find(task => task.id === taskId);
+    if (!task) {
+        return res.status(404).json({ error: 'Task not found' });
+    }
+    const { description, isCompleted } = req.body;
+    if (description) {
+        task.description = description;
+    }
+    if (isCompleted !== undefined) {
+        task.isCompleted = !!isCompleted; // Convertir a booleano
+    }
+    res.json(task);
+});
+
+// Eliminar una tarea
+app.delete('/tasks/:taskId', (req, res) => {
+    const taskId = parseInt(req.params.taskId);
+    tasks = tasks.filter(task => task.id !== taskId);
+    res.json({ success: true });
+});
+
+// Obtener tareas completas o incompletas
+app.get('/tasks/:status(completed|incomplete)', (req, res) => {
+    const status = req.params.status === 'completed';
+    const filteredTasks = tasks.filter(task => task.isCompleted === status);
+    res.json(filteredTasks);
+});
 
 
-//   router.get('/tasks/filter', (req, res) => {
-// 	const filtered = req.query.Completed
+// Crear una nueva tarea
+router.post('/tasks', (req, res) => {
+    const { description, isCompleted } = req.body;
+    if (!description) {
+        return res.status(400).json({ error: 'Description is required' });
+    }
+    const newTask = {
+        id: tasks.length + 1,
+        isCompleted: !!isCompleted, // Convertir a booleano
+        description
+    };
+    tasks.push(newTask);
+    res.status(201).json(newTask);
+});
 
-// 	if (filtered) {
-// 		const completedTasks = tasks.filter((item) => item.isCompleted === true);
-// 		res.json(completedTasks);
-// 	} else {
-// 		const completedTasks = tasks.filter((item) => item.isCompleted === false);
-// 		res.json(completedTasks);
-// 	}
-// });
+// Actualizar una tarea
+router.put('/tasks/:taskId', (req, res) => {
+    const taskId = parseInt(req.params.taskId);
+    const task = tasks.find(task => task.id === taskId);
+    if (!task) {
+        return res.status(404).json({ error: 'Task not found' });
+    }
+    const { description, isCompleted } = req.body;
+    if (description) {
+        task.description = description;
+    }
+    if (isCompleted !== undefined) {
+        task.isCompleted = !!isCompleted; // Convertir a booleano
+    }
+    res.json(task);
+});
 
+// Eliminar una tarea
+router.delete('/tasks/:taskId', (req, res) => {
+    const taskId = parseInt(req.params.taskId);
+    tasks = tasks.filter(task => task.id !== taskId);
+    res.json({ success: true });
+});
 
-
-
-
+// Obtener tareas completas o incompletas
+router.get('/tasks/:status(completed|incomplete)', (req, res) => {
+    const status = req.params.status === 'completed';
+    const filteredTasks = tasks.filter(task => task.isCompleted === status);
+    res.json(filteredTasks);
+});
 	
 
 
